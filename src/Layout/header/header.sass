@@ -1,0 +1,38 @@
+@import '../../global/_colors'
+
+.header
+  display: grid
+  grid-template-columns: auto 1fr minmax(100px, auto)
+  column-gap: 24px
+.menu
+  display: flex
+  align-items: center
+  &__link
+    font-size: 16px
+    text-decoration: none
+    font-weight: 800
+    padding: 12px
+    margin: 0 4px
+    color: #333333
+    transition: 0.3s all ease
+    &:hover
+      font-weight: 800
+      color: $-color-base
+  &__search
+    justify-self: end
+    &-input
+      width: 100%
+      position: relative
+    img
+      position: absolute
+      top: 0px
+      left: 12px
+    input
+      background: $-color-gray-ligth
+      border: none
+      min-width: 300px
+      height: 100%
+      border-radius: 8px
+      color: $-color-gray
+      font-size: 16px
+      padding-left: 46px

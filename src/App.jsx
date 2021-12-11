@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react'
 import Layout from './Layout/Layout'
 
 const App = () => {
-
   const [appData, setAppData] = useState({})
   
-  const URL = `${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&platforms=187`
-  useEffect(() => { 
+  useEffect(() => {
+    const URL = `${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&platforms=187`
+
     async function fetchData(){
       let headersList = {
         "Accept": "*/*",

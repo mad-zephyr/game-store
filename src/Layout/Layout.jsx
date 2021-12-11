@@ -8,7 +8,6 @@ import SearchBar from './searchBar/searchBar'
 import './layout.sass'
 
 const Layout =  ({data, children}) => {
-  console.log('Layout: ', data)
 
   return (
     <div className="wrapper">

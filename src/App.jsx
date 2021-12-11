@@ -4,6 +4,7 @@ import Layout from './Layout/Layout'
 const App = () => {
 
   const [appData, setAppData] = useState({})
+  
   const URL = `${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&platforms=187`
   useEffect(() => { 
     async function fetchData(){

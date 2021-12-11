@@ -9,19 +9,19 @@ const Header = () => {
   return (
     <div className="header">
 
-      <a href="/" className="logo">
+      <span className="logo">
         <span>
           <img style={{width:'184px'}} src={Logo} alt="PS market"/>
         </span> 
-      </a>
+      </span>
 
       <div className="menu">
-        <a href="/" className="menu__link"> Latest</a>
-        <a href="/" className="menu__link"> Collection</a>
-        <a href="/" className="menu__link"> Deals</a>
-        <a href="/" className="menu__link"> PS5</a>
-        <a href="/" className="menu__link"> Subscription</a>
-        <a href="/" className="menu__link"> Browse</a>
+        <span className="menu__link"> Latest</span>
+        <span className="menu__link"> Collection</span>
+        <span className="menu__link"> Deals</span>
+        <span className="menu__link"> PS5</span>
+        <span className="menu__link"> Subscription</span>
+        <span className="menu__link"> Browse</span>
       </div>
 
       <form  className="menu__search">

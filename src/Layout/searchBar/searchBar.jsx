@@ -5,12 +5,15 @@ const SearchBar = (props) => {
   return ( 
     <div className='searchbar'>
       <h2 className="title"> All PS5 games</h2>
-      <select id="datasort">
-        <option value="volvo">New to Old</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-      </select>
+      <div className='select-wrapper'>
+        <select id="datasort" >
+          <option value="volvo">New to Old</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
+      </div>
+     
 
       <form className="searchbar__filter">
 

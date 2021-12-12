@@ -53,8 +53,10 @@
   color: white
   grid-area: account
   padding: 4px 12px 4px 4px
-  margin-right: 40px
+  margin-right: 10px
   img
+    width: 28px
+    height: 28px
     border-radius: 50%
     margin-right: 8px
 
@@ -62,3 +64,14 @@
   grid-area: arrow
   justify-self: center
   align-self: center
+
+@media ( max-width: 428px )
+  .content
+    padding: 12px
+  .user
+    margin-right: 0px
+    img
+      width: 36px
+      height: 36px
+    &-title
+      display: none

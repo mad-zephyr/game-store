@@ -18,7 +18,7 @@ const preHeader = () => {
       <img src={arrow} alt="arrow" className="arrow" />
       <div className='user'>
         <img src={user} alt='user'/>
-        Prikkodko
+        <span className='user-title'>Prikkodko</span>
       </div>
 
     </div>

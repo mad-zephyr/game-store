@@ -3,6 +3,8 @@ import './card.sass'
  
  const Card = (props) => {
   const {background_image, name, rating, platforms} = props.data
+
+  console.log(props.data)
   
   const badgePlatforms = platforms.map(badge => {
     const { platform } = badge
@@ -13,7 +15,7 @@ import './card.sass'
 
   return (
     <div className="card"> 
-      <img src={background_image} alt="name" />
+      <img loading="lazy" src={background_image} alt="name" />
       <h3>Rating: {rating}</h3>
       <h2>{name}</h2>
       <div className='tags'>

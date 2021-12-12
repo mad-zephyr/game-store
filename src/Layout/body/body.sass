@@ -3,9 +3,14 @@
   margin: 0 auto
   border-radius: 20px
   padding: 32px
+  overflow-y: hidden
 
 .gamecontainer
   display: grid
   max-width: 2560px
   grid-template-columns: repeat(auto-fill, minmax(224px, 1fr))
   justify-content: space-between
+
+@media ( max-width: 520px )
+  .content
+    padding: 12px

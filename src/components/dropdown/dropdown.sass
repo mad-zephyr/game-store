@@ -1,0 +1,73 @@
+@import '../../global/_colors'
+
+.dropdown
+	display: flex
+	flex-direction: column
+	position: relative
+	border-right: 1px solid $-color-gray-extra-light
+	height: 100%
+	max-height: 48px
+	cursor: pointer
+	&::after
+		position: absolute
+		right: 12px
+		top: 50%
+		transform: translateY(-50%)
+		content: ''
+		pointer-events: none
+		width: 16px
+		height: 16px
+		margin-left: 12px
+		background: url('./img/arrow-24px.svg') center/cover no-repeat
+	&__button
+		display: flex
+		height: 100%
+		width: 100%
+		padding: 12px 12px 12px
+		font-style: normal
+		font-weight: normal
+		font-size: 16px
+		line-height: 24px
+		background: none
+		border: none
+		align-items: center
+		z-index: 10
+		pointer-events: auto
+		cursor: pointer
+	&-options
+		
+		background: white
+		transform: skewY(0)
+		opacity: 0
+		transform-origin: top left
+		transition: 0.3s all ease
+		border-radius: 0 0 12px 12px
+		z-index: 100
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15)
+		&-show
+			display: block!important
+			transform: skewY(1)
+			opacity: 1
+
+	.options
+		display: flex
+		align-items: center
+		min-height: 24px
+		width: 100%
+		padding: 12px 12px
+		border-top: 1px solid $-color-gray-extra-light
+		user-select: none
+		cursor: pointer
+		&:last-of-type
+			border-bottom: none
+			border-radius: 0 0 12px 12px
+		input
+			margin-right: 8px
+		&:hover
+			background: $-color-gray-extra-light
+
+	.dropdown-show
+		.dropdown
+			&:first-of-type
+				background: white
+				border-radius: 8px 0 0 0

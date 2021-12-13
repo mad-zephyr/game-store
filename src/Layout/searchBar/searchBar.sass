@@ -16,12 +16,12 @@
     display: flex
     flex-wrap: wrap
     align-items: center
+    justify-content: flex-start
     min-height: 48px
     grid-area: filter
     border: 1px solid $-color-gray-extra-light
     box-sizing: border-box
     border-radius: 8px
-    padding: 0 12px
 
 .select-wrapper
   position: relative
@@ -50,53 +50,6 @@
     cursor: pointer
     background: none
     border-right: 1px solid $-color-gray-extra-light
-
-.checkbox
-  position: relative
-  display: flex
-  align-items: center
-  height: 100%
-  padding: 4px 16px
-  height: 48px
-  font-weight: normal
-  font-size: 16px
-  line-height: 1
-  text-transform: uppercase
-  white-space: pre
-  &::after
-    content: ''
-    position: absolute
-    right: 0
-    height: calc(100% - 32px)
-    width: 1px
-    background: $-color-gray-extra-light
-  &-wrapper
-    margin-right: 4px
-  label
-    padding: 4px 12px
-    border: 1px solid $-color-gray-extra-light
-    border-radius: 8px
-    background: white
-    user-select: none
-    box-sizing: border-box
-    transition: 0.3s all ease
-    cursor: pointer
-  input
-    padding: 8px 12px
-    position: absolute
-    opacity: 0
-    &:checked + label
-      background: $-color-base
-      color: white
-      border: 1px solid $-color-base
-    .result
-      flex-grow: 1
-      width: auto
-      text-align: right
-      color: $-color-gray
-      font-weight: normal
-      font-size: 12px
-      line-height: 14px
 
 #datasort
   position: relative

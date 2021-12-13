@@ -10,26 +10,26 @@ const Header = () => {
     <div className="header">
 
       <span className="logo">
-        <span>
+        <a>
           <img style={{width:'184px'}} src={Logo} alt="PS market"/>
-        </span> 
+        </a> 
       </span>
 
       <div className="menu">
-        <span className="menu__link"> Latest</span>
-        <span className="menu__link"> Collection</span>
-        <span className="menu__link"> Deals</span>
-        <span className="menu__link"> PS5</span>
-        <span className="menu__link"> Subscription</span>
-        <span className="menu__link"> Browse</span>
+        <a className="menu__link"> Latest</a>
+        <a className="menu__link"> Collection</a>
+        <a className="menu__link"> Deals</a>
+        <a className="menu__link"> PS5</a>
+        <a className="menu__link"> Subscription</a>
+        <a className="menu__link"> Browse</a>
       </div>
 
-      <form  className="menu__search">
+      <div  className="menu__search">
         <span className="menu__search-input">
           <img  src={searchIcon} alt="" />
           <input type="text" placeholder="Search"/>
         </span>
-      </form>
+      </div>
     
     </div>
   )

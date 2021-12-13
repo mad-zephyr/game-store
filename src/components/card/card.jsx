@@ -1,11 +1,11 @@
 import React from 'react'
 import './card.sass'
- 
+ // console.log(props.data)
+
+
  const Card = (props) => {
   const {background_image, name, rating, platforms} = props.data
 
-  console.log(props.data)
-  
   const badgePlatforms = platforms.map(badge => {
     const { platform } = badge
     return <span className='tags-elem' key={platform.id}> {platform.name} </span>
@@ -15,7 +15,12 @@ import './card.sass'
 
   return (
     <div className="card"> 
-      <img loading="lazy" src={background_image} alt="name" />
+      <div className='card-image' loading="lazy" style={{  
+        background: `url(${background_image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+      }} alt="name" />
       <h3>Rating: {rating}</h3>
       <h2>{name}</h2>
       <div className='tags'>

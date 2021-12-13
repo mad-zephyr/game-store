@@ -3,25 +3,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Badge from '../../components/badge/badge'
+import Dropdown from '../../components/dropdown/dropdown'
 
 import './searchBar.sass'
-
-import Dropdown from '../../components/dropdown/dropdown'
 
 const SearchBar = (props) => {
 	const { dropDownData, count, genresFilterBadge, addHandler } = props
 
 	// eslint-disable-next-line react/prop-types
-	const genresBadge = genresFilterBadge?.map((genresBadgeData) => (
-		<Badge {...genresBadgeData} />
-	))
 
 	return (
 		<div className='searchbar'>
 			<h2 className='title'>All PS5 GAMES</h2>
 
-			<div className='select-wrapper'>
-				<select id='datasort'>
+			<div id='datasort'>
+				<select>
 					<option value='volvo'>New to Old</option>
 					<option value='saab'>Old to New</option>
 					<option value='opel'>Opel</option>
@@ -39,14 +35,20 @@ const SearchBar = (props) => {
 			</form>
 
 			<div className='searchbar__badge'>
-				<div className='searchbar__badge-wrapper'>{genresBadge}</div>
+				<div className='searchbar__badge-wrapper'>
+					{genresFilterBadge
+						? genresFilterBadge.map((genresBadgeData) => (
+								<Badge {...genresBadgeData} />
+						  ))
+						: null}
+				</div>
 			</div>
 		</div>
 	)
 }
 
 Dropdown.propTypes = {
-	count: PropTypes.number.isRequired,
+	count: PropTypes.number,
 	addHandler: PropTypes.func.isRequired,
 }
 

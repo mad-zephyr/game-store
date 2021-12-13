@@ -28,14 +28,16 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 		function chekcAllCheckbox() {
 			const checkboxesIputs = parent.querySelectorAll('[name="dropdown-group"]')
 			const checked = []
-			checkboxesIputs?.forEach((input) => {
-				if (input.checked) {
-					const id = input.getAttribute('data-id')
-					const value = input.getAttribute('value')
-					const name = input.closest('.options').textContent
-					checked.push({ id, value, name })
-				}
-			})
+			if (checkboxesIputs) {
+				checkboxesIputs.forEach((input) => {
+					if (input.checked) {
+						const id = input.getAttribute('data-id')
+						const value = input.getAttribute('value')
+						const name = input.closest('.options').textContent
+						checked.push({ id, value, name })
+					}
+				})
+			}
 			addHandler(checked)
 		}
 
@@ -52,21 +54,24 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 
 	function createCheckboxes() {
 		// eslint-disable-next-line react/prop-types
-		return dropDownOptions?.map((optionsData) => {
-			const { name, id, slug } = optionsData
-			return (
-				<label key={id} className='options' htmlFor={id}>
-					<input
-						type='checkbox'
-						name='dropdown-group'
-						value={slug}
-						data-id={id}
-						id={id}
-					/>
-					{name}
-				</label>
-			)
-		})
+		return dropDownOptions
+			? // eslint-disable-next-line react/prop-types
+			  dropDownOptions.map((optionsData) => {
+					const { name, id, slug } = optionsData
+					return (
+						<label key={id} className='options' htmlFor={id}>
+							<input
+								type='checkbox'
+								name='dropdown-group'
+								value={slug}
+								data-id={id}
+								id={id}
+							/>
+							{name}
+						</label>
+					)
+			  })
+			: null
 	}
 
 	return (
@@ -80,7 +85,9 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 			</button>
 			<div className='dropdown-options'>{createCheckboxes()}</div>
 			<div
-				role='none'
+				role='button'
+				tabIndex='0'
+				aria-label='Close'
 				onClick={(e) => handleClick(e)}
 				onKeyUp={handleClick}
 				className='dropdown-back'

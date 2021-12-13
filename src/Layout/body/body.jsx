@@ -9,12 +9,14 @@ const Body = (props) => {
 		games: { results },
 	} = props
 
-	const gameCards = results?.map((data) => <Card key={data.id} data={data} />)
-
 	return (
 		<div className='content'>
 			{children}
-			<div className='gamecontainer'>{gameCards}</div>
+			<div className='gamecontainer'>
+				{results
+					? results.map((data) => <Card key={data.id} data={data} />)
+					: null}{' '}
+			</div>
 		</div>
 	)
 }

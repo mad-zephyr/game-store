@@ -7,6 +7,7 @@
   margin-bottom: 21px
 .menu
   display: flex
+  flex-wrap: wrap
   align-items: center
   &__link
     font-size: 16px
@@ -38,3 +39,9 @@
       color: $-color-gray
       font-size: 16px
       padding-left: 46px
+
+@media ( max-width: 520px )
+  .header
+    display: none
+  .menu
+    display: none

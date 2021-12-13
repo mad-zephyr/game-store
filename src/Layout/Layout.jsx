@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import Body from './body/body'
 import Footer from './footer/footer'
 import Header from './header/header'
@@ -18,7 +18,7 @@ const Layout = ({ data, children }) => {
 	const filterGenresData = () => {
 		try {
 			// eslint-disable-next-line react/prop-types
-			const genresRaw = data?.results.map((gameData) => gameData.genres)
+			const genresRaw = data.results.map((gameData) => gameData.genres)
 			const genresArr = []
 			genresRaw.forEach((gameGenresList) => {
 				gameGenresList.forEach((gameGenre) => {
@@ -54,7 +54,5 @@ const Layout = ({ data, children }) => {
 		</div>
 	)
 }
-
-Layout.propTypes = {}
 
 export default Layout

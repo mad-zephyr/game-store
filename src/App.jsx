@@ -18,7 +18,6 @@ const App = () => {
 				headers: headersList,
 			})
 			const response = await request.json()
-			console.log(response)
 			setAppData(response)
 		}
 		fetchData()

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
+import React, {useRef, useLayoutEffect} from 'react';
 import './dropdown.sass'
 
 const Dropdown = () => {

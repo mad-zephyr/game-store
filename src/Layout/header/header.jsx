@@ -10,18 +10,18 @@ const Header = () => {
     <div className="header">
 
       <span className="logo">
-        <a>
+        <span>
           <img style={{width:'184px'}} src={Logo} alt="PS market"/>
-        </a> 
+        </ span> 
       </span>
 
       <div className="menu">
-        <a className="menu__link"> Latest</a>
-        <a className="menu__link"> Collection</a>
-        <a className="menu__link"> Deals</a>
-        <a className="menu__link"> PS5</a>
-        <a className="menu__link"> Subscription</a>
-        <a className="menu__link"> Browse</a>
+        <span className="menu__link"> Latest</ span>
+        <span className="menu__link"> Collection</ span>
+        <span className="menu__link"> Deals</ span>
+        <span className="menu__link"> PS5</ span>
+        <span className="menu__link"> Subscription</ span>
+        <span className="menu__link"> Browse</ span>
       </div>
 
       <div  className="menu__search">

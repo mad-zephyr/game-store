@@ -1,31 +1,30 @@
-import React, {useState, useEffect} from 'react' 
+import React, { useState, useEffect } from 'react'
 import Layout from './Layout/Layout'
 
 const App = () => {
-  const [appData, setAppData] = useState({})
-  
-  useEffect(() => {
+	const [appData, setAppData] = useState({})
 
-    async function fetchData(){
-      let headersList = {
-        "Accept": "*/*",
-        "User-Agent": "https://xmad.netlify.app/"
-      }
-      const URL = `${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&platforms=187`
-      const request = await fetch(URL, { 
-        method: "GET",
-        headers: headersList
-      })  
-      setAppData(await request.json())
-    }
-    fetchData()
-  }, [])
+	useEffect(() => {
+		async function fetchData() {
+			const headersList = {
+				Accept: '*/*',
+				'User-Agent': 'https://xmad.netlify.app/',
+			}
+			const URL = `${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&platforms=187`
+			// const URL = `${process.env.REACT_APP_API_URL}/platforms?key=${process.env.REACT_APP_API_KEY}`
 
-  return (
-    <>
-      <Layout data={appData}/>
-    </>
-  )
+			const request = await fetch(URL, {
+				method: 'GET',
+				headers: headersList,
+			})
+			const response = await request.json()
+			console.log(response)
+			setAppData(response)
+		}
+		fetchData()
+	}, [])
+
+	return <Layout data={appData} />
 }
 
 export default App

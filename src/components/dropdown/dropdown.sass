@@ -7,6 +7,7 @@
 	border-right: 1px solid $-color-gray-extra-light
 	height: 100%
 	max-height: 48px
+	width: 150px
 	cursor: pointer
 	&::after
 		position: absolute
@@ -35,7 +36,6 @@
 		pointer-events: auto
 		cursor: pointer
 	&-options
-		
 		background: white
 		transform: skewY(0)
 		opacity: 0
@@ -51,6 +51,9 @@
 
 	.options
 		display: flex
+		font-weight: normal
+		font-size: 16px
+		line-height: 1.2
 		align-items: center
 		min-height: 24px
 		width: 100%
@@ -71,3 +74,26 @@
 			&:first-of-type
 				background: white
 				border-radius: 8px 0 0 0
+
+	.dropdown-back
+		display: none
+		position: absolute
+		transform: translate(-50%, -50%)
+		opacity: 0
+		width: 200vw
+		height: 200vh
+		cursor: default
+	.dropdown-back-show
+		display: block
+		opacity: 1
+
+@media (max-width: 520px)
+	.dropdown
+		width: 50%
+		border-bottom: none
+		&:nth-of-type(1)
+			border-bottom: 1px solid $-color-gray-extra-light
+		&:nth-of-type(2)
+			border-bottom: 1px solid $-color-gray-extra-light
+		&:nth-of-type(2n)
+			border-right: none

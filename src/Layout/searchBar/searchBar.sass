@@ -3,10 +3,12 @@
 .searchbar
   position: relative
   display: grid
+  grid-template-rows: [startline] 1fr max-content minmax(min-content, min-content) [endline]
   grid-template-columns: [startline] repeat(3, 1fr) [endline]
-  grid-template-rows: [startline] 1fr max-content 1fr [endline]
-  grid-template-areas: "title title datasort" "filter filter filter"
-  gap: 24px
+  grid-template-areas: "title title datasort" "filter filter filter" "badge badge badge"
+  gap: 8px
+  margin-bottom: 16px
+  transition: 0.3s all ease
   .title
     grid-area: title
     font-weight: 600
@@ -50,6 +52,13 @@
     cursor: pointer
     background: none
     border-right: 1px solid $-color-gray-extra-light
+.result
+  flex-grow: 1
+  text-align: right
+  padding: 0 12px
+  font-size: 12px
+  text-transform: uppercase
+  color: #91969B
 
 #datasort
   position: relative

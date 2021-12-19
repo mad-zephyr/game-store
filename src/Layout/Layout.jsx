@@ -1,16 +1,28 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import Body from './body/body'
 import Footer from './footer/footer'
 import Header from './header/header'
 import PreHeader from './preHeader/preHeader'
 import SearchBar from './searchBar/searchBar'
+import Card from '../components/card/card'
+import Pagination from '../components/pagination/pagination'
 
 import './layout.sass'
+import './body/body.sass'
 
 // eslint-disable-next-line react/prop-types
-const Layout = ({ data, children }) => {
+const Layout = (props) => {
 	// eslint-disable-next-line react/prop-types
+	const {
+		data,
+		children,
+		onChangePage,
+		activePage,
+		onShowMore,
+		onClickGameCard,
+	} = props
 	const { count } = data
 	const [genresFilter, setGenresFilter] = useState()
 
@@ -34,14 +46,14 @@ const Layout = ({ data, children }) => {
 		}
 	}
 
-	const handleAddFilterBadge = (props) => {
-		setGenresFilter(props)
+	const handleAddFilterBadge = (gamesType) => {
+		setGenresFilter(gamesType)
 	}
 
 	return (
 		<div className='wrapper'>
 			<PreHeader />
-			<Body games={data}>
+			<div className='content'>
 				<Header />
 				<SearchBar
 					count={count}
@@ -49,10 +61,36 @@ const Layout = ({ data, children }) => {
 					genresFilterBadge={genresFilter}
 					dropDownData={filterGenresData()}
 				/>
-			</Body>
+				<div className='gamecontainer'>
+					{data.results
+						? data.results.map((games) => (
+								<Card
+									key={games.id}
+									data={games}
+									onClickGameCard={onClickGameCard}
+								/>
+						  ))
+						: null}
+				</div>
+				<Pagination
+					activePage={activePage}
+					onChangePage={onChangePage}
+					onShowMore={onShowMore}
+				/>
+			</div>
 			<Footer />
 		</div>
 	)
+}
+
+Layout.defaultProps = {
+	count: 0,
+	activePage: 1,
+}
+
+Layout.propTypes = {
+	count: PropTypes.number,
+	activePage: PropTypes.number,
 }
 
 export default Layout

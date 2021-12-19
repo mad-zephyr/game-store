@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
-import GamePage from './pages/gamePage'
-
-import Layout from './Layout/Layout'
+import Layout from '../Layout/Layout'
 
 const App = () => {
 	const [appData, setAppData] = useState({})
 	const [page, setPage] = useState(1)
-	const [gameData, setGameData] = useState()
-	const onPageResults = 20
+	const [onPageResults, setOnPageResults] = useState(20)
 	const [platform, setPlatform] = useState(187)
-	const [path, setPath] = useState('/')
-	const [nextUrl, setNexttUrl] = useState(page + 1)
 
 	const [url, setUrl] = useState(
 		`${process.env.REACT_APP_API_URL}/games?
 		key=${process.env.REACT_APP_API_KEY}
 		&page=${page}
 		&page_size=${onPageResults}
-		&platforms=187`,
+		&platforms=${platform}`,
 	)
+
+	const [nextUrl, setNexttUrl] = useState(page + 1)
 
 	const headersList = {
 		Accept: '*/*',
@@ -30,7 +26,6 @@ const App = () => {
 		const request = await fetch(requestUrl, {
 			method: 'GET',
 			headers: headersList,
-			credentials: 'same-origin',
 		})
 		setAppData(await request.json())
 	}
@@ -39,13 +34,10 @@ const App = () => {
 		const request = await fetch(requestUrl, {
 			method: 'GET',
 			headers: headersList,
-			credentials: 'same-origin',
 		})
 		const fetchetData = await request.json()
-		const uppdatedData = {
-			...fetchetData,
-			results: [...[...appData.results, ...fetchetData.results]],
-		}
+		const uppdatedData = {}
+		uppdatedData.results = [...[...appData.results, ...fetchetData.results]]
 		setPage((prevPage) => prevPage + 1)
 		setAppData(uppdatedData)
 	}
@@ -62,6 +54,11 @@ const App = () => {
 			(prevUrl) =>
 				`${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&page=${num}&page_size=${onPageResults}&platforms=${platform}`,
 		)
+		// window.scrollTo({
+		// top: 0,
+		// left: 0,
+		// behavior: 'smooth',
+		// })
 	}
 
 	useEffect(() => {
@@ -69,28 +66,12 @@ const App = () => {
 	}, [url])
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route
-					path={path}
-					element={
-						<Layout
-							onChangePage={onSwitchPage}
-							data={appData}
-							activePage={page}
-							onShowMore={onShowMore}
-						/>
-					}
-				/>
-				<Route
-					path='/game/:name/:id'
-					render={(props) => (
-						<GamePage onChangePage={onSwitchPage} data={props} />
-					)}
-					element={<GamePage onChangePage={onSwitchPage} data={gameData} />}
-				/>
-			</Routes>
-		</BrowserRouter>
+		<Layout
+			onChangePage={onSwitchPage}
+			data={appData}
+			activePage={page}
+			onShowMore={onShowMore}
+		/>
 	)
 }
 

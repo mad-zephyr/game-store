@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Logo from './img/logo.svg'
 import searchIcon from './img/search-icon.svg'
 
@@ -9,9 +8,9 @@ const Header = () => {
 	return (
 		<div className='header'>
 			<span className='logo'>
-				<span>
+				<a href='/'>
 					<img style={{ width: '184px' }} src={Logo} alt='PS market' />
-				</span>
+				</a>
 			</span>
 
 			<div className='menu'>

@@ -7,7 +7,7 @@ import './game.sass'
 
 const Game = (props) => {
 	const { gameData } = props
-	console.log(gameData)
+	// console.log(gameData)
 
 	const [favoriteList, setIconState] = useState(
 		JSON.parse(window.localStorage.getItem('favorite')),

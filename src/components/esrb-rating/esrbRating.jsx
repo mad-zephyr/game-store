@@ -8,7 +8,7 @@ import AdultsOnly from './icons/AO.svg'
 
 const EsrbRating = (props) => {
 	const { rating } = props
-	console.log(props)
+	// console.log(props)
 
 	const createRatingImage = (ratingIdentefication) => {
 		if (ratingIdentefication === 2) {

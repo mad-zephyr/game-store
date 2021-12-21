@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Squircle } from 'react-ios-corners'
 import './button.sass'
 
 const iconBack = (
@@ -38,6 +39,7 @@ const Button = (props) => {
 		icon,
 		setFavorite,
 		id,
+		squircle,
 	} = props
 
 	const favoriteList = JSON.parse(window.localStorage.getItem('favorite'))
@@ -59,21 +61,31 @@ const Button = (props) => {
 		return null
 	}
 
-	return (
-		<button
-			onTouchEnd={() =>
-				onChangePage(names) || onShowMore() || onGoBack() || setFavorite(id)
-			}
-			className={
-				activePage === names && classes === 'btn'
-					? `${classes} active`
-					: classes
-			}
-			type='button'
-		>
-			{setIcon()}
-			{names}
-		</button>
+	const renderBTN = () => {
+		return (
+			<button
+				onClick={() =>
+					onChangePage(names) || onShowMore() || onGoBack() || setFavorite(id)
+				}
+				className={
+					activePage === names && classes === 'btn'
+						? `${classes} active`
+						: classes
+				}
+				type='button'
+			>
+				{setIcon()}
+				{names}
+			</button>
+		)
+	}
+
+	return squircle ? (
+		<Squircle radius={16} roundness={0.17}>
+			{renderBTN()}
+		</Squircle>
+	) : (
+		renderBTN()
 	)
 }
 
@@ -86,6 +98,7 @@ Button.defaultProps = {
 	setFavorite: () => {},
 	icon: '',
 	id: undefined,
+	squircle: false,
 }
 
 Button.propTypes = {
@@ -98,6 +111,7 @@ Button.propTypes = {
 	setFavorite: PropTypes.func,
 	icon: PropTypes.string,
 	id: PropTypes.number,
+	squircle: PropTypes.bool,
 }
 
 export default Button

@@ -70,24 +70,20 @@ const Game = (props) => {
 						}}
 					>
 						<div className='game-nav'>
-							<Squircle radius={16} roundness={0.17}>
-								<Button
-									names='Go back'
-									classes='btn-back'
-									icon='back'
-									onGoBack={onClickGobackButton}
-								/>
-							</Squircle>
+							<Button
+								names='Go back'
+								classes='btn-back'
+								icon='back'
+								onGoBack={onClickGobackButton}
+							/>
 
-							<Squircle radius={16} roundness={0.17}>
-								<Button
-									names=''
-									classes='btn-favorite'
-									icon='heart'
-									setFavorite={onSetFavoriteGame}
-									id={gameData.id}
-								/>
-							</Squircle>
+							<Button
+								names=''
+								classes='btn-favorite'
+								icon='heart'
+								setFavorite={onSetFavoriteGame}
+								id={gameData.id}
+							/>
 						</div>
 						<Squircle radius={20} roundness={0.17}>
 							<div className='game-description'>

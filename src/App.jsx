@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import GamePage from './pages/gamePage'
 
 import Layout from './Layout/Layout'
@@ -69,28 +69,27 @@ const App = () => {
 	}, [url])
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route
-					path={path}
-					element={
-						<Layout
-							onChangePage={onSwitchPage}
-							data={appData}
-							activePage={page}
-							onShowMore={onShowMore}
-						/>
-					}
-				/>
-				<Route
-					path='/game/:name/:id'
-					render={(props) => (
-						<GamePage onChangePage={onSwitchPage} data={props} />
-					)}
-					element={<GamePage onChangePage={onSwitchPage} data={gameData} />}
-				/>
-			</Routes>
-		</BrowserRouter>
+		<Switch>
+			<Route
+				path='/'
+				exact
+				render={(props) => (
+					<Layout
+						onChangePage={onSwitchPage}
+						data={appData}
+						activePage={page}
+						onShowMore={onShowMore}
+						props={props}
+					/>
+				)}
+			/>
+			<Route
+				path='/game/:gameName/:gameId'
+				render={(props) => (
+					<GamePage onChangePage={onSwitchPage} data={gameData} props={props} />
+				)}
+			/>
+		</Switch>
 	)
 }
 

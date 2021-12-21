@@ -7,14 +7,15 @@ import './game.sass'
 
 const Game = (props) => {
 	const { gameData } = props
-	// console.log(gameData)
+	// eslint-disable-next-line react/destructuring-assignment
+	const { history } = props.props
 
 	const [favoriteList, setIconState] = useState(
 		JSON.parse(window.localStorage.getItem('favorite')),
 	)
 
 	const onClickGobackButton = () => {
-		window.history.back()
+		history.goBack()
 	}
 
 	const onSetFavoriteGame = (identificator) => {

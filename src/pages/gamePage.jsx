@@ -6,7 +6,12 @@ import PreHeader from '../Layout/preHeader/preHeader'
 import Game from '../Layout/game/game'
 import Footer from '../Layout/footer/footer'
 
-const GamePage = () => {
+const GamePage = (props) => {
+	const { match } = props.props
+	console.log(props.props)
+	const { gameId } = match.params
+	const id = gameId.match(/\d/gi).join('')
+
 	const [gameData, setGameData] = useState()
 	const headersList = {
 		Accept: '*/*',
@@ -31,13 +36,7 @@ const GamePage = () => {
 	}
 
 	useEffect(() => {
-		const { pathname } = window.location
-		const gameId = pathname
-			.match(/(?:id=\d{1,})/gm)[0]
-			.split('')
-			.filter((elem) => Number(elem))
-			.join('')
-		fetchGameData(Number(gameId))
+		fetchGameData(Number(id))
 	}, [])
 
 	return (
@@ -46,7 +45,7 @@ const GamePage = () => {
 			<div className='content'>
 				<Header />
 				<div className='game'>
-					<Game gameData={gameData} />
+					<Game gameData={gameData} props={props.props} />
 				</div>
 			</div>
 			<Footer />

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Squircle } from 'react-ios-corners'
 import './card.sass'
 
@@ -34,7 +35,7 @@ const Card = (props) => {
 			className='card'
 		>
 			<Squircle radius={32} roundness={0.17}>
-				<a href={`/game/${data.slug}/id=${data.id}`}>
+				<Link to={`/game/${data.slug}/id=${data.id}`}>
 					<div
 						className='card-image'
 						loading='lazy'
@@ -46,7 +47,7 @@ const Card = (props) => {
 						}}
 						alt={name}
 					/>
-				</a>
+				</Link>
 			</Squircle>
 			<h3>Rating: {rating}</h3>
 			<h2>{name}</h2>

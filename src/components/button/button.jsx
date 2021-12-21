@@ -61,7 +61,7 @@ const Button = (props) => {
 
 	return (
 		<button
-			onClick={() =>
+			onTouchEnd={() =>
 				onChangePage(names) || onShowMore() || onGoBack() || setFavorite(id)
 			}
 			className={

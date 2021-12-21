@@ -8,7 +8,6 @@ import Footer from '../Layout/footer/footer'
 
 const GamePage = (props) => {
 	const { match } = props.props
-	console.log(props.props)
 	const { gameId } = match.params
 	const id = gameId.match(/\d/gi).join('')
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, useLocation, useHistory } from 'react-router-dom'
+import { Route, Switch, useLocation, Redirect } from 'react-router-dom'
 import queryString from 'query-string'
 import GamePage from './pages/gamePage'
 import Layout from './Layout/Layout'
@@ -107,7 +107,8 @@ const App = () => {
 				path='/game/:game/:gameId'
 				render={(props) => <GamePage props={props} />}
 			/>
-			<Route
+			<Redirect to='/games' />
+			{/* <Route
 				path='/'
 				exact
 				render={(props) => (
@@ -118,7 +119,7 @@ const App = () => {
 						props={props}
 					/>
 				)}
-			/>
+			/> */}
 		</Switch>
 	)
 }

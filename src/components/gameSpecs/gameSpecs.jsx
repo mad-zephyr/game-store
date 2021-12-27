@@ -6,7 +6,6 @@ import { Squircle } from 'react-ios-corners'
 import './gameSpecs.sass'
 
 const GameSpecs = ({ gameData }) => {
-	console.log(gameData)
 	// eslint-disable-next-line camelcase
 	const {
 		playtime,

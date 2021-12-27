@@ -34,7 +34,6 @@ const GamePage = (props) => {
 			})
 			.then((response) => {
 				setGameData(response)
-				console.log(response)
 			})
 	}
 

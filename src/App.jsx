@@ -40,7 +40,6 @@ const App = () => {
 		request
 			.then((data) => data.json())
 			.then((data) => {
-				console.log(data)
 				setAppData(data)
 			})
 	}
@@ -49,19 +48,40 @@ const App = () => {
 		setUrl((prevURL) => currentURL)
 	}
 
-	async function fetchMoreData(requestUrl) {
-		const request = await fetch(requestUrl, {
+	function fetchMoreData() {
+		const request = fetch(appData.next, {
 			method: 'GET',
 			headers: headersList,
+
 			credentials: 'same-origin',
 		})
-		const fetchetData = await request.json()
-		const uppdatedData = {
-			...fetchetData,
-			results: [...[...appData.results, ...fetchetData.results]],
-		}
+
+		request
+			.then((dataGame) => dataGame.json())
+			.then((dataGame) => {
+				return {
+					...dataGame,
+					results: [...[...appData.results, ...dataGame.results]],
+					next: dataGame.next,
+				}
+			})
+			.then((dataGame) => {
+				const unicGameDataResult = new Set()
+				dataGame.results.forEach((eachGameData) => {
+					if (unicGameDataResult.has(eachGameData.id)) {
+						unicGameDataResult.add(eachGameData)
+					}
+				})
+				setAppData(dataGame)
+				return dataGame
+			})
+
 		setPage((prevPage) => prevPage + 1)
-		setAppData(uppdatedData)
+		// setAppData(uppdatedData)
+	}
+
+	const onShowMore = () => {
+		fetchMoreData()
 	}
 
 	useEffect(() => {
@@ -78,6 +98,7 @@ const App = () => {
 						data={appData}
 						activePage={page}
 						onLocationChange={onLocationChange}
+						onShowMore={onShowMore}
 						props={props}
 					/>
 				)}

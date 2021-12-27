@@ -2,8 +2,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Badge from '../../components/badge/badge'
-import Dropdown from '../../components/dropdown/dropdown'
+import Badge from '../badge/badge'
+import Dropdown from '../dropdown/dropdown'
 
 import './searchBar.sass'
 
@@ -20,8 +20,6 @@ const SearchBar = (props) => {
 				<select>
 					<option value='volvo'>New to Old</option>
 					<option value='saab'>Old to New</option>
-					<option value='opel'>Opel</option>
-					<option value='audi'>Audi</option>
 				</select>
 			</div>
 

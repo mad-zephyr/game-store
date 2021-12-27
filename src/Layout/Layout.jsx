@@ -2,10 +2,10 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Body from './body/body'
-import Footer from './footer/footer'
-import Header from './header/header'
-import PreHeader from './preHeader/preHeader'
-import SearchBar from './searchBar/searchBar'
+import Footer from '../components/footer/footer'
+import Header from '../components/header/header'
+import PreHeader from '../components/preHeader/preHeader'
+import SearchBar from '../components/searchBar/searchBar'
 import Card from '../components/card/card'
 import Pagination from '../components/pagination/pagination'
 
@@ -18,6 +18,7 @@ const Layout = (props) => {
 	const {
 		data,
 		children,
+		onLocationChange,
 		onChangePage,
 		activePage,
 		onShowMore,
@@ -73,6 +74,7 @@ const Layout = (props) => {
 						: null}
 				</div>
 				<Pagination
+					onLocationChange={onLocationChange}
 					activePage={activePage}
 					onChangePage={onChangePage}
 					onShowMore={onShowMore}

@@ -1,10 +1,13 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react'
-import Header from '../Layout/header/header'
-import PreHeader from '../Layout/preHeader/preHeader'
+import React, { useState, useEffect, useLocation } from 'react'
+import { Squircle } from 'react-ios-corners'
+import Header from '../components/header/header'
+import PreHeader from '../components/preHeader/preHeader'
 import Game from '../Layout/game/game'
-import Footer from '../Layout/footer/footer'
+import DescritpionGame from '../components/gameTextDescription/gameTextDescription'
+import Footer from '../components/footer/footer'
+import GameSpecs from '../components/gameSpecs/gameSpecs'
 
 const GamePage = (props) => {
 	const { match } = props.props
@@ -31,6 +34,7 @@ const GamePage = (props) => {
 			})
 			.then((response) => {
 				setGameData(response)
+				console.log(response)
 			})
 	}
 
@@ -38,17 +42,23 @@ const GamePage = (props) => {
 		fetchGameData(Number(id))
 	}, [])
 
-	return (
+	return gameData ? (
 		<div className='wrapper'>
 			<PreHeader />
-			<div className='content'>
-				<Header />
-				<div className='game'>
-					<Game gameData={gameData} props={props.props} />
+			<Squircle className='squircle' radius={0} roundness={0.17}>
+				<div className='content'>
+					<Header />
+					<div className='game'>
+						<Game gameData={gameData} props={props.props} />
+						<GameSpecs gameData={gameData} />
+						<DescritpionGame gameData={gameData} />
+					</div>
 				</div>
-			</div>
+			</Squircle>
 			<Footer />
 		</div>
+	) : (
+		<> Loading... </>
 	)
 }
 

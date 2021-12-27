@@ -4,8 +4,7 @@ import React from 'react'
 import './body.sass'
 
 const Body = (props) => {
-	const { children, onChangePage, activePage, onShowMore, onClickGameCard } =
-		props
+	const { children } = props
 
 	return (
 		<div className='content'>

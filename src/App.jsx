@@ -1,38 +1,52 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom'
+import queryString from 'query-string'
 import GamePage from './pages/gamePage'
-
 import Layout from './Layout/Layout'
 
 const App = () => {
 	const [appData, setAppData] = useState({})
 	const [page, setPage] = useState(1)
-	const [gameData, setGameData] = useState()
-	const onPageResults = 20
-	const [platform, setPlatform] = useState(187)
-	const [path, setPath] = useState('/')
-	const [nextUrl, setNexttUrl] = useState(page + 1)
 
-	const [url, setUrl] = useState(
-		`${process.env.REACT_APP_API_URL}/games?
-		key=${process.env.REACT_APP_API_KEY}
-		&page=${page}
-		&page_size=${onPageResults}
-		&platforms=187`,
-	)
+	const location = useLocation()
+	const pathName = '/games'
+	const query = queryString.parse(location.search)
+	const urlString = queryString.stringify(query)
+
+	const setURLforNavigation = () => {
+		const updatedUrlString = `${pathName}?${urlString}`
+		return updatedUrlString
+	}
+	const licationURL = setURLforNavigation()
+
+	const [url, setUrl] = useState(licationURL)
 
 	const headersList = {
 		Accept: '*/*',
-		'User-Agent': 'https://xmad.netlify.app/',
+		'User-Agent': 'http://www.some-newsite.app',
 	}
 
-	async function fetchData(requestUrl) {
-		const request = await fetch(requestUrl, {
+	function fetchData() {
+		const requestURL = `${
+			process.env.REACT_APP_API_URL
+		}${setURLforNavigation()}&key=${process.env.REACT_APP_API_KEY}`
+
+		const request = fetch(requestURL, {
 			method: 'GET',
 			headers: headersList,
 			credentials: 'same-origin',
 		})
-		setAppData(await request.json())
+
+		request
+			.then((data) => data.json())
+			.then((data) => {
+				console.log(data)
+				setAppData(data)
+			})
+	}
+
+	const onLocationChange = (currentURL) => {
+		setUrl((prevURL) => currentURL)
 	}
 
 	async function fetchMoreData(requestUrl) {
@@ -50,43 +64,38 @@ const App = () => {
 		setAppData(uppdatedData)
 	}
 
-	const onShowMore = () => {
-		setNexttUrl(page + 1)
-		const URL = `${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&page=${nextUrl}&page_size=${onPageResults}&platforms=${platform}`
-		fetchMoreData(URL)
-	}
-
-	const onSwitchPage = (num) => {
-		setPage(num)
-		setUrl(
-			(prevUrl) =>
-				`${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&page=${num}&page_size=${onPageResults}&platforms=${platform}`,
-		)
-	}
-
 	useEffect(() => {
-		fetchData(url)
+		fetchData()
 	}, [url])
 
 	return (
 		<Switch>
 			<Route
-				path='/'
+				path='/games'
 				exact
 				render={(props) => (
 					<Layout
-						onChangePage={onSwitchPage}
 						data={appData}
 						activePage={page}
-						onShowMore={onShowMore}
+						onLocationChange={onLocationChange}
 						props={props}
 					/>
 				)}
 			/>
 			<Route
-				path='/game/:gameName/:gameId'
+				path='/game/:game/:gameId'
+				render={(props) => <GamePage props={props} />}
+			/>
+			<Route
+				path='/'
+				exact
 				render={(props) => (
-					<GamePage onChangePage={onSwitchPage} data={gameData} props={props} />
+					<Layout
+						data={appData}
+						onLocationChange={onLocationChange}
+						activePage={page}
+						props={props}
+					/>
 				)}
 			/>
 		</Switch>

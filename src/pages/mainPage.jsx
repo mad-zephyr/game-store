@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router'
 import Layout from '../Layout/Layout'
 
 const App = () => {
@@ -7,13 +8,18 @@ const App = () => {
 	const [onPageResults, setOnPageResults] = useState(20)
 	const [platform, setPlatform] = useState(187)
 
-	const [url, setUrl] = useState(
-		`${process.env.REACT_APP_API_URL}/games?
+	const location = useLocation()
+	const history = useHistory()
+
+	const curURL = `${process.env.REACT_APP_API_URL}/games?
 		key=${process.env.REACT_APP_API_KEY}
 		&page=${page}
 		&page_size=${onPageResults}
-		&platforms=${platform}`,
-	)
+		&platforms=${platform}`
+
+	console.log(history)
+
+	const [url, setUrl] = useState(curURL)
 
 	const [nextUrl, setNexttUrl] = useState(page + 1)
 
@@ -54,11 +60,6 @@ const App = () => {
 			(prevUrl) =>
 				`${process.env.REACT_APP_API_URL}/games?key=${process.env.REACT_APP_API_KEY}&page=${num}&page_size=${onPageResults}&platforms=${platform}`,
 		)
-		// window.scrollTo({
-		// top: 0,
-		// left: 0,
-		// behavior: 'smooth',
-		// })
 	}
 
 	useEffect(() => {

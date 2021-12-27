@@ -1,8 +1,10 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { Squircle } from 'react-ios-corners'
 import EsrbRating from '../../components/esrb-rating/esrbRating'
 import Button from '../../components/button/button'
+import blurryImage from './assets/blurry.svg'
 import './game.sass'
 
 const Game = (props) => {
@@ -13,6 +15,8 @@ const Game = (props) => {
 	const [favoriteList, setIconState] = useState(
 		JSON.parse(window.localStorage.getItem('favorite')),
 	)
+
+	const [bgImageLoaded, setBGImageLoaded] = useState(false)
 
 	const onClickGobackButton = () => {
 		history.goBack()
@@ -55,19 +59,46 @@ const Game = (props) => {
 				</div>
 			)
 		})
-		platformBadge.length = 3
+		platformBadge.length = 2
 		return platformBadge
 	}
 
+	const urlRegex =
+		// eslint-disable-next-line no-useless-escape
+		/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&=]*)/gm
+	const shortUrl = gameData?.website.match(urlRegex)
+
+	const gamePublishersName = () => {
+		const title = gameData.developers.map((eachPubliser) => (
+			<span key={eachPubliser.id}>{eachPubliser.name}</span>
+		))
+		// if (window.innerWidth <= 420) {
+		// title.length = 2
+		// return title
+		// }
+		return title
+	}
+
 	return (
-		<div className='game-wrapper'>
+		<div
+			onLoad={() => {
+				setBGImageLoaded(true)
+			}}
+			className='game-wrapper'
+		>
 			{gameData ? (
 				<Squircle radius={32} roundness={0.17}>
 					<div
 						className='game-background'
-						style={{
-							background: `url(${gameData.background_image}) center center/cover no-repeat`,
-						}}
+						style={
+							bgImageLoaded
+								? {
+										background: `url(${gameData.background_image}) center center/cover no-repeat`,
+								  }
+								: {
+										backgroundImage: `url(${blurryImage}) center center/cover no-repeat`,
+								  }
+						}
 					>
 						<div className='game-nav'>
 							<Button
@@ -75,6 +106,8 @@ const Game = (props) => {
 								classes='btn-back'
 								icon='back'
 								onGoBack={onClickGobackButton}
+								squircle
+								squircleRadius={16}
 							/>
 
 							<Button
@@ -83,6 +116,8 @@ const Game = (props) => {
 								icon='heart'
 								setFavorite={onSetFavoriteGame}
 								id={gameData.id}
+								squircle
+								squircleRadius={16}
 							/>
 						</div>
 						<Squircle radius={20} roundness={0.17}>
@@ -91,9 +126,10 @@ const Game = (props) => {
 									<div className='game-platformlist'>
 										{createPlatformBadge()}
 									</div>
-									<div className='game-esrbRating'>
-										<EsrbRating rating={gameData.esrb_rating} />
-									</div>
+									<EsrbRating
+										classes='game-esrbRating'
+										rating={gameData.esrb_rating}
+									/>
 								</div>
 								<div
 									style={{ background: `#${gameData.dominant_color}` }}
@@ -102,9 +138,9 @@ const Game = (props) => {
 									<div className='game-block-left'>
 										<div className='game-title'>{gameData.name}</div>
 										<div className='game-publishers'>
-											{gameData.developers.map((eachPubliser) => (
-												<span key={eachPubliser.id}> {eachPubliser.name}</span>
-											))}
+											<div className='game-publishers-wrapper'>
+												{gamePublishersName()}
+											</div>
 										</div>
 									</div>
 									<div className='game-block-right'>
@@ -113,7 +149,7 @@ const Game = (props) => {
 												<button type='submit'>Game site</button>
 											</a>
 										</Squircle>
-										<span> {gameData.website} </span>
+										<span> {shortUrl} </span>
 									</div>
 								</div>
 							</div>

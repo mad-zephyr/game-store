@@ -23,6 +23,7 @@
 .active
 	border: 2px solid $-color-base
 
+
 .btn-more
 	width: 100%
 	flex-grow: 1
@@ -65,10 +66,15 @@
 	cursor: pointer
 	background: #000000
 	border: none
+	box-shadow: inset 0px 0px 0px 0px $-color-red
+	transition: 0.5s all ease
 	svg
 		transition: 0.3s all ease
-
+		fill: #302D2D!important 
 	&:hover
+		background: #ffffff
 		svg
-			fill: $-color-black-extra-light
-			// fill: $-color-red
+			fill: white
+.fill
+	svg
+		fill: $-color-red!important

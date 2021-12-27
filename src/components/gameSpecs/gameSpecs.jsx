@@ -64,7 +64,7 @@ const GameSpecs = ({ gameData }) => {
 	const ageRating = (
 		<div className='block'>
 			<div className='subtitle'> Age rating </div>
-			<div className='title'>{esrb_rating.name}</div>
+			<div className='title'>{esrb_rating?.name || 'Rating pending'}</div>
 		</div>
 	)
 

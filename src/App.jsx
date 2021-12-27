@@ -7,19 +7,21 @@ import Layout from './Layout/Layout'
 const App = () => {
 	const [appData, setAppData] = useState({})
 	const [page, setPage] = useState(1)
+	const [url, setUrl] = useState('/')
 
 	const location = useLocation()
-	const pathName = '/games'
-	const query = queryString.parse(location.search)
-	const urlString = queryString.stringify(query)
 
 	const setURLforNavigation = () => {
-		const updatedUrlString = `${pathName}?${urlString}`
-		return updatedUrlString
-	}
-	const licationURL = setURLforNavigation()
+		const pathName = location.pathname
+		const query = queryString.parse(location.search)
+		const urlString = Object.entries(query)
+			.map((locationData) => locationData.join('='))
+			.join('&')
 
-	const [url, setUrl] = useState(licationURL)
+		const locationString = `${pathName}?${urlString}`
+		setUrl((prevLocation) => locationString)
+		return locationString
+	}
 
 	const headersList = {
 		Accept: '*/*',
@@ -52,7 +54,6 @@ const App = () => {
 		const request = fetch(appData.next, {
 			method: 'GET',
 			headers: headersList,
-
 			credentials: 'same-origin',
 		})
 
@@ -73,11 +74,8 @@ const App = () => {
 					}
 				})
 				setAppData(dataGame)
-				return dataGame
 			})
-
 		setPage((prevPage) => prevPage + 1)
-		// setAppData(uppdatedData)
 	}
 
 	const onShowMore = () => {

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Body from './body/body'
 import Footer from '../components/footer/footer'
@@ -24,9 +25,9 @@ const Layout = (props) => {
 		onShowMore,
 		onClickGameCard,
 	} = props
-	const { count } = data
-	const [genresFilter, setGenresFilter] = useState()
 
+	const [genresFilter, setGenresFilter] = useState()
+	const history = useHistory()
 	// eslint-disable-next-line consistent-return
 	const filterGenresData = () => {
 		try {
@@ -35,8 +36,7 @@ const Layout = (props) => {
 			const genresArr = []
 			genresRaw.forEach((gameGenresList) => {
 				gameGenresList.forEach((gameGenre) => {
-					const { id } = gameGenre
-					if (!genresArr.some((genreData) => genreData.id === id)) {
+					if (!genresArr.some((genreData) => genreData.id === gameGenre.id)) {
 						genresArr.push(gameGenre)
 					}
 				})
@@ -47,7 +47,20 @@ const Layout = (props) => {
 		}
 	}
 
+	const createURL = (queryName, arrData) => {
+		const arr = arrData.map((filterData) => filterData.value).join(',')
+		const path = history.location.pathname
+		if (arr) {
+			history.push(`${path}?${queryName}=${arr}`)
+			onLocationChange(`${path}?${queryName}=${arr}`)
+		} else {
+			history.push(`${path}`)
+			onLocationChange(`${path}`)
+		}
+	}
+
 	const handleAddFilterBadge = (gamesType) => {
+		createURL('genres', gamesType)
 		setGenresFilter(gamesType)
 	}
 
@@ -57,7 +70,7 @@ const Layout = (props) => {
 			<div className='content'>
 				<Header />
 				<SearchBar
-					count={count}
+					data={data}
 					addHandler={handleAddFilterBadge}
 					genresFilterBadge={genresFilter}
 					dropDownData={filterGenresData()}
@@ -86,12 +99,10 @@ const Layout = (props) => {
 }
 
 Layout.defaultProps = {
-	count: 0,
 	activePage: 1,
 }
 
 Layout.propTypes = {
-	count: PropTypes.number,
 	activePage: PropTypes.number,
 }
 

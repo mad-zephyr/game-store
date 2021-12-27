@@ -6,7 +6,7 @@ import './badge.sass'
 const Badge = (props) => {
 	const { id, value, name: names } = props
 	return (
-		<span key={id} data-id={id} value={value} className='searchbar__badge-elem'>
+		<span data-id={id} value={value} className='searchbar__badge-elem'>
 			{names}
 			<button type='button'>
 				<svg
@@ -25,7 +25,7 @@ const Badge = (props) => {
 }
 
 Badge.propTypes = {
-	id: PropTypes.number.isRequired,
+	id: PropTypes.string.isRequired,
 	value: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 }

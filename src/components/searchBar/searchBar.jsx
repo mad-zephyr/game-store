@@ -8,8 +8,7 @@ import Dropdown from '../dropdown/dropdown'
 import './searchBar.sass'
 
 const SearchBar = (props) => {
-	const { dropDownData, count, genresFilterBadge, addHandler } = props
-
+	const { dropDownData, genresFilterBadge, addHandler, data } = props
 	// eslint-disable-next-line react/prop-types
 
 	return (
@@ -29,14 +28,16 @@ const SearchBar = (props) => {
 					dropDownOptions={dropDownData}
 					addHandler={addHandler}
 				/>
-				<div className='result'>{count} games</div>
+				<div className='result'>
+					<span>{data?.results?.length}</span> from {data.count} games
+				</div>
 			</form>
 
 			<div className='searchbar__badge'>
 				<div className='searchbar__badge-wrapper'>
 					{genresFilterBadge
 						? genresFilterBadge.map((genresBadgeData) => (
-								<Badge {...genresBadgeData} />
+								<Badge key={genresBadgeData.id} {...genresBadgeData} />
 						  ))
 						: null}
 				</div>

@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 import React, { useRef, useLayoutEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './dropdown.sass'
 
@@ -13,6 +14,8 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 	}, [])
 
 	const handleClick = (e) => {
+		let dropDownOpen = false
+
 		e.preventDefault()
 		e.stopPropagation()
 		const parent = e.target.closest('.dropdown')
@@ -25,7 +28,7 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 			background.classList.toggle('dropdown-back-show')
 		}
 
-		function chekcAllCheckbox() {
+		function checkCheckbox() {
 			const checkboxesIputs = parent.querySelectorAll('[name="dropdown-group"]')
 			const checked = []
 			if (checkboxesIputs) {
@@ -41,14 +44,20 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 			addHandler(checked)
 		}
 
-		if (e.target.classList.contains('dropdown__button')) {
-			handleShowDropDown()
-			chekcAllCheckbox()
+		if (e.target.classList.contains('dropdown__button') && !dropDownOpen) {
+			if (!dropDownOpen) {
+				handleShowDropDown()
+				dropDownOpen = !dropDownOpen
+			} else {
+				handleShowDropDown()
+				checkCheckbox()
+			}
 		}
 
 		if (e.target.classList.contains('dropdown-back')) {
+			dropDownOpen = !dropDownOpen
 			handleShowDropDown()
-			chekcAllCheckbox()
+			checkCheckbox()
 		}
 	}
 

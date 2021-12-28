@@ -53,7 +53,6 @@ const App = () => {
 				setAppData(data)
 			})
 			.catch((error) => {
-				console.log('error', error)
 				history.push('/server-down')
 			})
 	}

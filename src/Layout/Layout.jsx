@@ -71,7 +71,6 @@ const Layout = (props) => {
 				genresSet.push(eachGameGenres)
 			}
 		})
-		console.log(genresSet, gameGenres)
 		createURL('genres', genresSet)
 		setGenresFilter(genresSet)
 	}

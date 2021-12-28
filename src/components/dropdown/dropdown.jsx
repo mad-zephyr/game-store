@@ -49,7 +49,6 @@ const Dropdown = ({
 	const handleCheck = (e) => {
 		const { target } = e
 		e.stopPropagation()
-		console.log(target, target.checked)
 	}
 
 	function createCheckboxes() {

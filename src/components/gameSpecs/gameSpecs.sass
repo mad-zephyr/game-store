@@ -1,0 +1,53 @@
+@import '../../global/_colors'
+
+.game
+	&-specification
+		background: $-color-black
+		padding: 32px
+		&-wrapper
+			display: inline-flex
+			gap: 24px
+			.left
+				display: flex
+				flex-wrap: wrap
+				align-content: flex-start
+				flex-grow: 1
+				width: 25%
+				gap: 24px
+			.right 
+				display: flex
+				align-content: flex-start
+				flex-grow: 1
+				flex-wrap: wrap
+				gap: 24px
+			.block
+				max-width: 500px
+			.subtitle
+				display: block
+				width: 100%
+				font-weight: normal
+				font-size: 12px
+				line-height: 1.4
+				text-transform: uppercase
+				color: #ffffff5e
+				margin-bottom: 6px
+			.title
+				font-weight: normal
+				font-size: 20px
+				line-height: 1.4
+				color: #FFFFFF
+				&:not(:last-of-type)
+					&::after
+						content: '|'
+						color: #ffffff36
+						margin: 0 8px
+		
+@media (max-width: 520px)
+	.game
+		&-specification
+			&-wrapper 
+				flex-flow: column
+				.left
+					flex-flow: row wrap
+					width: 100%
+					min-width: 35%

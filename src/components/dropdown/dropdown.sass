@@ -1,0 +1,105 @@
+@import '../../global/_colors'
+
+.dropdown
+	display: flex
+	flex-direction: column
+	position: relative
+	border-right: 1px solid $-color-gray-extra-light
+	height: 100%
+	max-height: 48px
+	width: 170px
+	cursor: pointer
+	&::after
+		position: absolute
+		right: 12px
+		top: 50%
+		transform: translateY(-50%)
+		content: ''
+		pointer-events: none
+		width: 16px
+		height: 16px
+		margin-left: 12px
+		background: url('./img/arrow-24px.svg') center/cover no-repeat
+	&__button
+		display: flex
+		height: 100%
+		width: 100%
+		padding: 12px 12px 12px
+		font-style: normal
+		font-weight: normal
+		font-size: 16px
+		line-height: 24px
+		background: none
+		border: none
+		align-items: center
+		z-index: 10
+		pointer-events: auto
+		cursor: pointer
+	&-options
+		background: white
+		transform-origin: top
+		transform: scaleY(0)
+		opacity: 0
+		transform-origin: top left
+		transition: 0.3s all ease
+		border-radius: 0 0 12px 12px
+		z-index: 100
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15)
+		transition: 0.3s all ease-in
+		&-show
+			display: block!important
+			transform: scaleY(1)
+			opacity: 1
+
+	.options
+		display: flex
+		font-weight: normal
+		font-size: 16px
+		line-height: 1.2
+		align-items: center
+		min-height: 24px
+		width: 100%
+		padding: 12px 12px
+		border-top: 1px solid $-color-gray-extra-light
+		user-select: none
+		cursor: pointer
+		&:last-of-type
+			border-bottom: none
+			border-radius: 0 0 12px 12px
+		input
+			margin-right: 8px
+			width: 14px
+			height: 14px
+		&:hover
+			background: $-color-gray-extra-light
+
+	.dropdown-show
+		.dropdown
+			&:first-of-type
+				background: white
+				border-radius: 8px 0 0 0
+
+	.dropdown-back
+		display: none
+		position: absolute
+		transform: translate(-50%, -50%)
+		opacity: 0
+		width: 200vw
+		height: 200vh
+		cursor: default
+	.dropdown-back-show
+		display: block
+		opacity: 0.3
+		background: black
+		z-index: 1
+
+@media (max-width: 520px)
+	.dropdown
+		width: 50%
+		border-bottom: none
+		&:nth-of-type(1)
+			border-bottom: 1px solid $-color-gray-extra-light
+		&:nth-of-type(2)
+			border-bottom: 1px solid $-color-gray-extra-light
+		&:nth-of-type(2n)
+			border-right: none

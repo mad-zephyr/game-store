@@ -1,0 +1,166 @@
+@import '../../global/_colors'
+
+.game
+	display: flex
+	flex-direction: column
+	width: 100%
+	gap: 12px
+	a
+		text-decoration: none
+	&-background
+		display: flex
+		flex-direction: column
+		justify-content: space-between
+		width: 100%
+		height: 600px
+		padding-top: 10%
+		object-fit: cover
+		// aspect-ratio: 16/9
+		padding: 32px
+	&-nav
+		display: flex
+		width: 100%
+		height: fit-content
+		align-items: center
+		justify-content: space-between
+	&-description
+		display: flex
+		flex-direction: column
+		align-content: flex-end
+	&-info
+		display: flex
+		align-items: flex-end
+		justify-content: space-between
+		margin-bottom: -1px
+	&-esrbRating
+		margin: 8px 0
+		width: 54px
+		height: 66px
+	&-block
+		display: flex
+		justify-content: space-between
+		width: 100%
+		padding: 16px
+		border-radius: 0 20px 20px 
+		&-right
+			span
+				display: flex
+				align-items: center
+				justify-content: center
+				width: 100%
+				text-align: center
+				color: white
+				font-style: normal
+				font-weight: 300
+				font-size: 14px
+				line-height: 1
+				color: #FFFFFF
+				opacity: 0.4
+
+			button
+				display: flex
+				width: 100%
+				flex-direction: row
+				justify-content: center
+				align-items: center
+				padding: 16px 24px
+				border: none
+				background: $-color-red
+
+				text-decoration: none
+				font-weight: 600
+				font-size: 24px
+				line-height: 28px
+				color: white
+				margin-bottom: 8px
+				cursor: pointer
+	&-title
+		font-weight: 600
+		font-size: 48px
+		line-height: 1.2
+		color: white
+		margin-bottom: 8px
+	&-publishers
+		display: flex
+		align-items: center
+		gap: 8px
+		font-style: normal
+		font-weight: 300
+		font-size: 16px
+		line-height: 16px
+		color: white
+		width: 100%
+		&::before
+			content: 'Developer:  '
+			color: #ffffff5d
+			margin-right: 8px
+		&-wrapper
+			width: auto
+
+			span
+				&:not(:last-of-type)
+					&::after
+						content: '|'
+						margin: 0 6px
+						color: #ffffff5d
+
+			
+	&-platformlist
+		height: 24px
+		display: flex
+		color: white
+		gap: 4px
+	&-platform
+		position: relative
+		font-style: normal
+		font-weight: 300
+		font-size: 12px
+		line-height: 1
+		padding: 8px 16px 0 
+		border-radius: 8px 8px 0 0 
+		text-transform: uppercase 
+		&::after, &::before
+			content: ''
+			bottom: 0
+			width: 4px
+			height: 4px
+			position: absolute
+			background: none
+		&::after
+			right: 0
+			background: url('./assets/right-round.svg') center center/cover no-repeat
+			transform: translateX(100%)
+		&::before
+			left: 0
+			background: url('./assets/left-round.svg') center center/cover no-repeat
+			transform: translateX(-100%)
+
+
+@media (max-width: 520px)
+	.game
+		&-background
+			padding: 12px
+		&-title
+			font-size: 32px
+		&-publishers
+			display: inline-flex
+			font-size: 12px
+			flex-wrap: nowrap
+			gap: 4px
+			color: #ffffffa2
+			overflow-x: hidden
+			&-wrapper
+				display: inline-block
+				overflow-x: auto
+				width: max-content
+		&-block
+			flex-direction: column
+			&-left
+				margin-bottom: 12px
+			&-right
+				span
+					font-size: 12px
+				button
+					width: 100%
+					font-size: 18px
+					

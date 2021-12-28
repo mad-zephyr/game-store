@@ -1,0 +1,80 @@
+@import '../../global/_colors'
+
+.btn
+	display: flex
+	align-items: center
+	width: 48px
+	height: 48px
+	justify-content: center
+	background: white
+	border: 1px solid $-color-gray-extra-light
+	box-sizing: border-box
+	font-weight: 600
+	font-size: 16px
+	line-height: 16px
+	border-radius: 8px
+	cursor: pointer
+	transition: 0.3s all ease
+	&:hover
+		background: $-color-gray-ligth
+	&:active
+		background: $-color-base
+		color: white
+.active
+	border: 2px solid $-color-base
+
+
+.btn-more
+	width: 100%
+	flex-grow: 1
+
+.btn-back
+	display: flex
+	flex-direction: row
+	gap: 8px
+	justify-content: center
+	align-items: center
+	padding: 12px 16px
+	background: #000000
+	border: none
+	border-radius: 8px
+	height: 40px
+	color: white
+	cursor: pointer
+
+	font-style: normal
+	font-weight: 600
+	font-size: 16px
+	line-height: 16px
+	transition: 0.3s all ease
+	svg
+		fill: white
+		transition: 0.3s all ease
+
+	&:hover
+		color: $-color-base
+		svg
+			fill: $-color-base
+
+.btn-favorite
+	display: flex
+	justify-content: center
+	align-items: center
+	padding: 8px
+	border-radius: 8px
+	height: 40px
+	cursor: pointer
+	background: #000000
+	border: none
+	box-shadow: inset 0px 0px 0px 0px $-color-red
+	transition: 0.5s all ease
+	svg
+		transition: 0.3s all ease
+		fill: #302D2D!important 
+	&:hover
+		background: #ffffff
+		svg
+			fill: white
+.fill
+	svg
+		fill: $-color-red!important

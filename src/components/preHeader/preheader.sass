@@ -1,0 +1,77 @@
+.preheader
+  display: grid
+  height: 80px
+  grid-template-columns: [startline] 1fr 1fr 1fr [endline]
+  grid-template-rows: 1fr 1fr
+  padding: 0 8px
+  grid-template-areas: 'ps_logo sony account' 'ps_logo arrow account'
+  border-top: 8px solid black
+  
+.ps_logo
+  padding-left: 8px
+  display: flex
+  align-items: center
+  grid-area: ps_logo
+
+.sony
+  position: relative
+  display: flex
+  align-items: flex-start
+  padding-top: 10px
+  justify-content: center
+  background: black
+  grid-area: sony
+  width: 120px
+  height: 37px
+  border-radius: 0 0 20px 20px
+  margin: 0 auto
+  &::before
+    position: absolute
+    content: ''
+    width: 20px
+    height: 20px
+    left: -20px
+    top: 0
+    background: #0060D1
+    box-shadow: 5px -3px 0px #000000, inset -8px 6px 0px #0060D1
+    border-radius: 0px 13px 0px 0px
+  &::after
+    position: absolute
+    content: ''
+    width: 20px
+    height: 20px
+    right: -20px
+    top: 0
+    background: #0060D1
+    box-shadow: -4px -4px 0px #000000, inset -8px 6px 0px #0060D1
+    border-radius: 13px 0px 0px 0px
+
+.user
+  display: flex
+  align-items: center
+  justify-self: end
+  color: white
+  grid-area: account
+  padding: 4px 12px 4px 4px
+  margin-right: 10px
+  img
+    width: 28px
+    height: 28px
+    border-radius: 50%
+    margin-right: 8px
+
+.arrow
+  grid-area: arrow
+  justify-self: center
+  align-self: center
+
+@media ( max-width: 428px )
+  .content
+    padding: 12px
+  .user
+    margin-right: 0px
+    img
+      width: 36px
+      height: 36px
+    &-title
+      display: none

@@ -4,14 +4,10 @@
 		"stylelint-order-config-standard",
 		"stylelint-config-standard-scss"
 	],
-	"plugins": [
-		"stylelint-order"
-	],
+	"plugins": ["stylelint-order"],
 	"rules": {
 		"string-quotes": "single",
-		"indentation": [
-			"tab"
-		],
+		"indentation": ["tab"],
 		"color-hex-case": "upper"
 	}
 }

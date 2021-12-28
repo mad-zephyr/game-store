@@ -13,33 +13,35 @@ const SearchBar = (props) => {
 
 	return (
 		<div className='searchbar'>
-			<h2 className='title'>All PS5 GAMES</h2>
+			<h2 className='title'>ALL PS5 GAMES</h2>
 
 			<div id='datasort'>
 				<select>
-					<option value='volvo'>New to Old</option>
-					<option value='saab'>Old to New</option>
+					<option value='new'>New to Old</option>
+					<option value='old'>Old to New</option>
 				</select>
 			</div>
 
-			<form className='searchbar__filter'>
-				<Dropdown
-					name='Genres'
-					dropDownOptions={dropDownData}
-					addHandler={addHandler}
-				/>
-				<div className='result'>
-					<span>{data?.results?.length}</span> from {data.count} games
+			<div className='searchbar-wrapper'>
+				<div className='searchbar__filter'>
+					<Dropdown
+						name='Genres'
+						dropDownOptions={dropDownData}
+						addHandler={addHandler}
+					/>
+					<div className='result'>
+						<span>{data?.results?.length}</span> from {data.count} games
+					</div>
 				</div>
-			</form>
 
-			<div className='searchbar__badge'>
-				<div className='searchbar__badge-wrapper'>
-					{genresFilterBadge
-						? genresFilterBadge.map((genresBadgeData) => (
-								<Badge key={genresBadgeData.id} {...genresBadgeData} />
-						  ))
-						: null}
+				<div className='searchbar__badge'>
+					<div className='searchbar__badge-wrapper'>
+						{genresFilterBadge
+							? genresFilterBadge.map((genresBadgeData) => (
+									<Badge key={genresBadgeData.id} {...genresBadgeData} />
+							  ))
+							: null}
+					</div>
 				</div>
 			</div>
 		</div>

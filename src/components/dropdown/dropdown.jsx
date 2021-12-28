@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-shadow */
 import React, { useRef, useLayoutEffect } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -5,9 +6,13 @@ import PropTypes from 'prop-types'
 import './dropdown.sass'
 
 // eslint-disable-next-line react/prop-types
-const Dropdown = ({ name, dropDownOptions, addHandler }) => {
+const Dropdown = ({
+	name,
+	dropDownOptions,
+	handleAddFilterBadge,
+	genresFilterBadge,
+}) => {
 	const dropdownRef = useRef(null)
-
 	useLayoutEffect(() => {
 		dropdownRef.current.querySelector('.dropdown-options').style.display =
 			'none'
@@ -28,37 +33,23 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 			background.classList.toggle('dropdown-back-show')
 		}
 
-		function checkCheckbox() {
-			const checkboxesIputs = parent.querySelectorAll('[name="dropdown-group"]')
-			const checked = []
-			if (checkboxesIputs) {
-				checkboxesIputs.forEach((input) => {
-					if (input.checked) {
-						const id = input.getAttribute('data-id')
-						const value = input.getAttribute('value')
-						const name = input.closest('.options').textContent
-						checked.push({ id, value, name })
-					}
-				})
-			}
-			addHandler(checked)
-		}
-
 		if (e.target.classList.contains('dropdown__button') && !dropDownOpen) {
 			if (!dropDownOpen) {
 				handleShowDropDown()
 				dropDownOpen = !dropDownOpen
-			} else {
-				handleShowDropDown()
-				checkCheckbox()
 			}
 		}
 
 		if (e.target.classList.contains('dropdown-back')) {
 			dropDownOpen = !dropDownOpen
 			handleShowDropDown()
-			checkCheckbox()
 		}
+	}
+
+	const handleCheck = (e) => {
+		const { target } = e
+		e.stopPropagation()
+		console.log(target, target.checked)
 	}
 
 	function createCheckboxes() {
@@ -68,7 +59,13 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 			  dropDownOptions.map((optionsData) => {
 					const { name, id, slug } = optionsData
 					return (
-						<label key={id} className='options' htmlFor={id}>
+						<label
+							key={id}
+							className='options'
+							htmlFor={id}
+							role='presentation'
+							onClick={(e) => handleCheck(e)}
+						>
 							<input
 								type='checkbox'
 								name='dropdown-group'
@@ -107,7 +104,7 @@ const Dropdown = ({ name, dropDownOptions, addHandler }) => {
 
 Dropdown.propTypes = {
 	name: PropTypes.string.isRequired,
-	addHandler: PropTypes.func.isRequired,
+	handleAddFilterBadge: PropTypes.func.isRequired,
 }
 
 export default Dropdown

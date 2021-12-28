@@ -8,7 +8,13 @@ import Dropdown from '../dropdown/dropdown'
 import './searchBar.sass'
 
 const SearchBar = (props) => {
-	const { dropDownData, genresFilterBadge, addHandler, data } = props
+	const {
+		dropDownData,
+		genresFilterBadge,
+		handleAddFilterBadge,
+		data,
+		onDeleteFilterBadge,
+	} = props
 	// eslint-disable-next-line react/prop-types
 
 	return (
@@ -27,7 +33,8 @@ const SearchBar = (props) => {
 					<Dropdown
 						name='Genres'
 						dropDownOptions={dropDownData}
-						addHandler={addHandler}
+						handleAddFilterBadge={handleAddFilterBadge}
+						genresFilterBadge={genresFilterBadge}
 					/>
 					<div className='result'>
 						<span>{data?.results?.length}</span> from {data.count} games
@@ -38,7 +45,11 @@ const SearchBar = (props) => {
 					<div className='searchbar__badge-wrapper'>
 						{genresFilterBadge
 							? genresFilterBadge.map((genresBadgeData) => (
-									<Badge key={genresBadgeData.id} {...genresBadgeData} />
+									<Badge
+										key={genresBadgeData.id}
+										{...genresBadgeData}
+										onDeleteFilterBadge={onDeleteFilterBadge}
+									/>
 							  ))
 							: null}
 					</div>
@@ -51,6 +62,7 @@ const SearchBar = (props) => {
 Dropdown.propTypes = {
 	count: PropTypes.number,
 	addHandler: PropTypes.func.isRequired,
+	onDeleteFilterBadge: PropTypes.func.isRequired,
 }
 
 export default SearchBar

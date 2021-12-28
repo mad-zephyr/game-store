@@ -26,7 +26,7 @@ const Layout = (props) => {
 		onClickGameCard,
 	} = props
 
-	const [genresFilter, setGenresFilter] = useState()
+	const [genresFilter, setGenresFilter] = useState([])
 	const history = useHistory()
 	// eslint-disable-next-line consistent-return
 	const filterGenresData = () => {
@@ -59,9 +59,28 @@ const Layout = (props) => {
 		}
 	}
 
-	const handleAddFilterBadge = (gamesType) => {
-		createURL('genres', gamesType)
-		setGenresFilter(gamesType)
+	const handleAddFilterBadge = (gameGenres) => {
+		const genresSet = []
+
+		gameGenres.forEach((eachGameGenres) => {
+			if (
+				!genresSet.some(
+					(eachGenresSet) => eachGenresSet?.id === eachGameGenres?.id,
+				)
+			) {
+				genresSet.push(eachGameGenres)
+			}
+		})
+		console.log(genresSet, gameGenres)
+		createURL('genres', genresSet)
+		setGenresFilter(genresSet)
+	}
+
+	const handleDeleteFilterBadge = (identificator) => {
+		const updatedGenresFilter = genresFilter.filter(
+			(genre) => genre.id !== identificator,
+		)
+		setGenresFilter(updatedGenresFilter)
 	}
 
 	return (
@@ -71,7 +90,8 @@ const Layout = (props) => {
 				<Header />
 				<SearchBar
 					data={data}
-					addHandler={handleAddFilterBadge}
+					handleAddFilterBadge={handleAddFilterBadge}
+					onDeleteFilterBadge={handleDeleteFilterBadge}
 					genresFilterBadge={genresFilter}
 					dropDownData={filterGenresData()}
 				/>

@@ -1,14 +1,20 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import './badge.sass'
 
 const Badge = (props) => {
-	const { id, value, name: names } = props
+	const { id, value, name: names, onDeleteFilterBadge } = props
+
+	const deleteHandler = (identificator) => {
+		onDeleteFilterBadge(identificator)
+	}
+
 	return (
 		<span data-id={id} value={value} className='searchbar__badge-elem'>
 			{names}
-			<button type='button'>
+			<button type='button' onClick={() => deleteHandler(id)}>
 				<svg
 					className='close-btn'
 					version='1.1'
@@ -28,6 +34,7 @@ Badge.propTypes = {
 	id: PropTypes.string.isRequired,
 	value: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
+	onDeleteFilterBadge: PropTypes.func.isRequired,
 }
 
 export default Badge

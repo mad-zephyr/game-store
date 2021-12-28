@@ -3,11 +3,10 @@
 .searchbar
   position: relative
   display: grid
-  grid-template-rows: [startline] 1fr max-content minmax(min-content, min-content) [endline]
+  grid-template-rows: [startline] 1fr max-content [endline]
   grid-template-columns: [startline] repeat(3, 1fr) [endline]
   grid-template-areas: "title title datasort" "filter filter filter" "badge badge badge"
   gap: 8px
-  margin-bottom: 16px
   transition: 0.3s all ease
   .title
     grid-area: title
@@ -25,6 +24,7 @@
     border: 1px solid $-color-gray-extra-light
     box-sizing: border-box
     border-radius: 8px
+    margin-bottom: 4px
 
 .select-wrapper
   position: relative

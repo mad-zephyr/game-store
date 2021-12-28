@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, useLocation, Redirect } from 'react-router-dom'
+import {
+	Route,
+	Switch,
+	useLocation,
+	useHistory,
+	Redirect,
+} from 'react-router-dom'
 import queryString from 'query-string'
 import GamePage from './pages/gamePage'
 import Layout from './Layout/Layout'
+import ServerDown from './pages/serverDown'
 
 const App = () => {
 	const [appData, setAppData] = useState({})
@@ -10,6 +17,7 @@ const App = () => {
 	const [url, setUrl] = useState('/')
 
 	const location = useLocation()
+	const history = useHistory()
 
 	const setURLforNavigation = () => {
 		const pathName = location.pathname
@@ -25,7 +33,7 @@ const App = () => {
 
 	const headersList = {
 		Accept: '*/*',
-		'User-Agent': 'http://www.some-newsite.app',
+		'User-Agent': 'http://rawg.io',
 	}
 
 	function fetchData() {
@@ -43,6 +51,10 @@ const App = () => {
 			.then((data) => data.json())
 			.then((data) => {
 				setAppData(data)
+			})
+			.catch((error) => {
+				console.log('error', error)
+				history.push('/server-down')
 			})
 	}
 
@@ -90,7 +102,6 @@ const App = () => {
 		<Switch>
 			<Route
 				path='/games'
-				exact
 				render={(props) => (
 					<Layout
 						data={appData}
@@ -105,6 +116,7 @@ const App = () => {
 				path='/game/:game/:gameId'
 				render={(props) => <GamePage props={props} />}
 			/>
+			<Route path='/server-down' component={ServerDown} />
 			<Redirect to='/games' />
 			{/* <Route
 				path='/'

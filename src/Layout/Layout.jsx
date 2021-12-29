@@ -60,25 +60,15 @@ const Layout = (props) => {
 	}
 
 	const handleAddFilterBadge = (gameGenres) => {
-		const genresSet = []
-
-		gameGenres.forEach((eachGameGenres) => {
-			if (
-				!genresSet.some(
-					(eachGenresSet) => eachGenresSet?.id === eachGameGenres?.id,
-				)
-			) {
-				genresSet.push(eachGameGenres)
-			}
-		})
-		createURL('genres', genresSet)
-		setGenresFilter(genresSet)
+		createURL('genres', gameGenres)
+		setGenresFilter(gameGenres)
 	}
 
 	const handleDeleteFilterBadge = (identificator) => {
 		const updatedGenresFilter = genresFilter.filter(
 			(genre) => genre.id !== identificator,
 		)
+		createURL('genres', updatedGenresFilter)
 		setGenresFilter(updatedGenresFilter)
 	}
 
@@ -92,6 +82,7 @@ const Layout = (props) => {
 					handleAddFilterBadge={handleAddFilterBadge}
 					onDeleteFilterBadge={handleDeleteFilterBadge}
 					genresFilterBadge={genresFilter}
+					genresFilter={genresFilter}
 					dropDownData={filterGenresData()}
 				/>
 				<div className='gamecontainer'>

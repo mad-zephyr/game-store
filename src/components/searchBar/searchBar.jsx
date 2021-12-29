@@ -14,6 +14,7 @@ const SearchBar = (props) => {
 		handleAddFilterBadge,
 		data,
 		onDeleteFilterBadge,
+		genresFilter,
 	} = props
 	// eslint-disable-next-line react/prop-types
 
@@ -34,7 +35,7 @@ const SearchBar = (props) => {
 						name='Genres'
 						dropDownOptions={dropDownData}
 						handleAddFilterBadge={handleAddFilterBadge}
-						genresFilterBadge={genresFilterBadge}
+						genresFilter={genresFilter}
 					/>
 					<div className='result'>
 						<span>{data?.results?.length}</span> from {data.count} games
@@ -61,8 +62,6 @@ const SearchBar = (props) => {
 
 Dropdown.propTypes = {
 	count: PropTypes.number,
-	addHandler: PropTypes.func.isRequired,
-	onDeleteFilterBadge: PropTypes.func.isRequired,
 }
 
 export default SearchBar

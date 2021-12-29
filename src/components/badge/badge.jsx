@@ -31,7 +31,7 @@ const Badge = (props) => {
 }
 
 Badge.propTypes = {
-	id: PropTypes.string.isRequired,
+	id: PropTypes.number.isRequired,
 	value: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	onDeleteFilterBadge: PropTypes.func.isRequired,

@@ -1,16 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-shadow */
-import React, { useRef, useLayoutEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useRef, useLayoutEffect, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import './dropdown.sass'
 
-// eslint-disable-next-line react/prop-types
 const Dropdown = ({
 	name,
 	dropDownOptions,
 	handleAddFilterBadge,
-	genresFilterBadge,
+	genresFilter,
 }) => {
 	const dropdownRef = useRef(null)
 	useLayoutEffect(() => {
@@ -23,6 +21,7 @@ const Dropdown = ({
 
 		e.preventDefault()
 		e.stopPropagation()
+
 		const parent = e.target.closest('.dropdown')
 		const options = parent.querySelector('.dropdown-options')
 		const background = parent.querySelector('.dropdown-back')
@@ -49,14 +48,51 @@ const Dropdown = ({
 	const handleCheck = (e) => {
 		const { target } = e
 		e.stopPropagation()
+
+		const checkedInputs = target
+			.closest('.dropdown-options')
+			.querySelectorAll('input[type="checkbox"]:checked')
+		const badgeArrData = []
+
+		if (target.tagName === 'INPUT') {
+			checkedInputs.forEach((input) => {
+				const badge = {
+					id: Number(input.id),
+					value: input.value,
+					name: input.getAttribute('data-text'),
+				}
+				badgeArrData.push(badge)
+			})
+
+			handleAddFilterBadge(badgeArrData)
+		}
 	}
 
-	function createCheckboxes() {
-		// eslint-disable-next-line react/prop-types
+	const checkMap = new Map()
+	genresFilter.forEach((genre) => {
+		if (!checkMap.has(genre.id)) {
+			checkMap.set(genre.id, genre)
+		}
+	})
+
+	const createCheckboxes = () => {
 		return dropDownOptions
 			? // eslint-disable-next-line react/prop-types
 			  dropDownOptions.map((optionsData) => {
 					const { name, id, slug } = optionsData
+
+					const input = (
+						<input
+							type='checkbox'
+							name='dropdown-group'
+							value={slug}
+							data-id={id}
+							id={id}
+							data-text={name}
+							onChange={() => {}}
+							checked={!!checkMap.has(id)}
+						/>
+					)
 					return (
 						<label
 							key={id}
@@ -65,19 +101,17 @@ const Dropdown = ({
 							role='presentation'
 							onClick={(e) => handleCheck(e)}
 						>
-							<input
-								type='checkbox'
-								name='dropdown-group'
-								value={slug}
-								data-id={id}
-								id={id}
-							/>
+							{input}
 							{name}
 						</label>
 					)
 			  })
 			: null
 	}
+
+	useEffect(() => {
+		createCheckboxes()
+	}, [genresFilter])
 
 	return (
 		<div ref={dropdownRef} className='dropdown'>

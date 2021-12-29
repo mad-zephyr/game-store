@@ -1,6 +1,8 @@
 import React from 'react'
-import logo from './img/logo.svg'
-import sony from './img/Sony_logo.svg'
+import { Link } from 'react-router-dom'
+import logo from './img/xg-logo.svg'
+
+import xGamezLogo from './img/xgamez-logo.svg'
 import user from './img/user.jpg'
 import arrow from './img/arrow.svg'
 import './preheader.sass'
@@ -8,11 +10,11 @@ import './preheader.sass'
 const preHeader = () => {
 	return (
 		<div className='preheader'>
-			<div className='ps_logo'>
+			<Link to='/' className='ps_logo'>
 				<img src={logo} alt='alt' />
-			</div>
-			<div className='sony'>
-				<img src={sony} alt='sony logo' />
+			</Link>
+			<div className='logo'>
+				<img src={xGamezLogo} alt='sony logo' />
 			</div>
 
 			<img src={arrow} alt='arrow' className='arrow' />

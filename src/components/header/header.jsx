@@ -7,12 +7,6 @@ import './header.sass'
 const Header = () => {
 	return (
 		<div className='header'>
-			<span className='logo'>
-				<a href='/'>
-					<img style={{ width: '184px' }} src={Logo} alt='PS market' />
-				</a>
-			</span>
-
 			<div className='menu'>
 				<span className='menu__link'> Latest </span>
 				<span className='menu__link'> Collection </span>

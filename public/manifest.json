@@ -20,6 +20,6 @@
 	],
 	"start_url": "https://xmad.netlify.app/",
 	"display": "standalone",
-	"theme_color": "#0060D1",
-	"background_color": "#0060D1"
+	"theme_color": "#000",
+	"background_color": "#1E1E1F"
 }

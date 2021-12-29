@@ -29,7 +29,10 @@ const Card = (props) => {
 	}
 
 	return (
-		<div
+		<Squircle
+			className='card'
+			radius={38}
+			roundness={0.17}
 			tabIndex='0'
 			type='button'
 			role='button'
@@ -40,31 +43,32 @@ const Card = (props) => {
 			}}
 			onKeyUp={(e) => handlerId(e, id)}
 			onClick={(e) => handlerId(e, id)}
-			className='card'
 		>
-			<Squircle radius={32} roundness={0.17}>
-				<img style={{ display: 'none' }} src={bgUrl} alt='game' />
-				<Link to={`/game/${data.slug}/id=${data.id}`}>
-					<div
-						className='card-image'
-						loading='lazy'
-						style={
-							imageLoaded
-								? {
-										background: `url(${bgUrl}) center center/cover no-repeat `,
-								  }
-								: {
-										background: `url(${blurryImage}) center center/cover no-repeat `,
-								  }
-						}
-						alt={name}
-					/>
-				</Link>
-			</Squircle>
-			<h3>Rating: {rating}</h3>
-			<h2>{name}</h2>
-			<div className='tags'>{badgePlatforms}</div>
-		</div>
+			<div className='card-wrapper'>
+				<Squircle radius={32} roundness={0.17}>
+					<img style={{ display: 'none' }} src={bgUrl} alt='game' />
+					<Link to={`/game/${data.slug}/id=${data.id}`}>
+						<div
+							className='card-image'
+							loading='lazy'
+							style={
+								imageLoaded
+									? {
+											background: `url(${bgUrl}) center center/cover no-repeat `,
+									  }
+									: {
+											background: `url(${blurryImage}) center center/cover no-repeat `,
+									  }
+							}
+							alt={name}
+						/>
+					</Link>
+				</Squircle>
+				<h3>Rating: {rating}</h3>
+				<h2>{name}</h2>
+				<div className='tags'>{badgePlatforms}</div>
+			</div>
+		</Squircle>
 	)
 }
 

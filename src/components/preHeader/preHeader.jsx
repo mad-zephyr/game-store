@@ -15,7 +15,6 @@ const preHeader = () => {
 		} else {
 			headerMenu.current.style.height = ''
 		}
-		console.log(headerMenu.current.style.height)
 	}
 
 	return (

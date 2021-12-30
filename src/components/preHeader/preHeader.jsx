@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from './img/xg-logo.svg'
-
-import xGamezLogo from './img/xgamez-logo.svg'
+import xGameLogo from './img/xgamez-logo.svg'
 import user from './img/user.jpg'
 import arrow from './img/arrow.svg'
+
 import './preheader.sass'
 
 const preHeader = () => {
@@ -14,13 +14,13 @@ const preHeader = () => {
 				<img src={logo} alt='alt' />
 			</Link>
 			<div className='logo'>
-				<img src={xGamezLogo} alt='sony logo' />
+				<img src={xGameLogo} alt='main logo' />
 			</div>
 
 			<img src={arrow} alt='arrow' className='arrow' />
 			<div className='user'>
 				<img src={user} alt='user' />
-				<span className='user-title'>Prikkodko</span>
+				<span className='user-title'>User Account</span>
 			</div>
 		</div>
 	)

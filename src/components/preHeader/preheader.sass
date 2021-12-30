@@ -2,11 +2,12 @@
 
 .preheader
   display: grid
-  height: 80px
+  min-height: 80px
   grid-template-columns: [startline] 1fr 1fr 1fr [endline]
-  grid-template-rows: 1fr 1fr
+  grid-template-rows: 1fr 1fr max-content
+  grid-auto-flow: auto
   padding: 0 8px
-  grid-template-areas: 'ps_logo logo account' 'ps_logo arrow account'
+  grid-template-areas: 'ps_logo logo account' 'ps_logo arrow account' 'menu menu menu'
   border-top: 8px solid black
   
 .ps_logo
@@ -51,6 +52,17 @@
     background: $-color-base
     box-shadow: -4px -4px 0px #000000, inset -8px 6px 0px $-color-base
     border-radius: 13px 0px 0px 0px
+  
+.header-menu-opener
+  display: flex
+  justify-content: center
+  cursor: pointer
+.header-menu
+  grid-area: menu
+  height: 0
+  width:100%
+  transition: 0.3s all ease
+
 
 .user
   display: flex
